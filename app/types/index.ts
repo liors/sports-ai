@@ -37,6 +37,12 @@ export interface ScheduleEvent {
   date: string;
   name: string;
   competitions: {
+    competitors: {
+      id: string;
+      score: {
+        value: string;
+      };
+    }[];
     status: {
       type: {
         detail: string;

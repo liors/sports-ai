@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar } from 'lucide-react';
 import { ScheduleEvent } from '@/app/types';
+import Score from './Score';
 
 interface ScheduleListProps {
   events: ScheduleEvent[];
@@ -29,6 +30,8 @@ export const ScheduleList: React.FC<ScheduleListProps> = ({ events }) => {
           minute: '2-digit',
         });
         const status = event.competitions[0]?.status?.type?.detail || '';
+        const tm1Score = event.competitions[0]?.competitors[0].score?.value;
+        const tm2Score = event.competitions[0]?.competitors[1].score?.value;
         const scoreboardLink = event.links?.find((link) =>
           link.rel.includes('scoreboard')
         )?.href;
@@ -48,9 +51,12 @@ export const ScheduleList: React.FC<ScheduleListProps> = ({ events }) => {
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-brand-blue-500 transition-colors">
                 {event.name}
               </h3>
+              <div className="flex items-center gap-2">
               <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-brand-blue-100 dark:bg-brand-blue-900/30 text-brand-blue-600 dark:text-brand-blue-300">
                 {status}
               </span>
+              <Score tm1Score={tm1Score} tm2Score={tm2Score} />              
+              </div>
             </div>
             {scoreboardLink && (
               <a
