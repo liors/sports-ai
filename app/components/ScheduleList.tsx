@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar } from 'lucide-react';
 import { ScheduleEvent } from '@/app/types';
 import Score from './Score';
-
+import EventLink from './EventLink';
 interface ScheduleListProps {
   events: ScheduleEvent[];
 }
@@ -55,19 +55,26 @@ export const ScheduleList: React.FC<ScheduleListProps> = ({ events }) => {
               <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-brand-blue-100 dark:bg-brand-blue-900/30 text-brand-blue-600 dark:text-brand-blue-300">
                 {status}
               </span>
-              <Score tm1Score={tm1Score} tm2Score={tm2Score} />              
+              <Score tm1Score={tm1Score} tm2Score={tm2Score} />        
               </div>
             </div>
-            {scoreboardLink && (
-              <a
-                href={scoreboardLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-linear-to-r from-brand-blue-500 to-brand-blue-600 text-white font-semibold py-2.5 px-6 rounded-xl hover:from-brand-blue-600 hover:to-brand-blue-700 transition-all duration-200 text-sm text-center shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
-              >
-                View Game
-              </a>
-            )}
+            <div className="flex items-center gap-3 sm:ml-4">
+              {tm1Score && tm2Score && (
+                <div className="ml-auto sm:ml-0">
+                  <EventLink event={event} />
+                </div>
+              )}
+              {scoreboardLink && (
+                <a
+                  href={scoreboardLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-linear-to-r from-brand-blue-500 to-brand-blue-600 text-white font-semibold py-2.5 px-6 rounded-xl hover:from-brand-blue-600 hover:to-brand-blue-700 transition-all duration-200 text-sm text-center shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+                >
+                  View Game
+                </a>
+              )}
+            </div>
           </div>
         );
       })}
