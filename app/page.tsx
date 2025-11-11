@@ -1,8 +1,9 @@
 import { Header } from "@/app/components/Header";
 import { ScheduleList } from "@/app/components/ScheduleList";
-import EventsService from "@/app/services/events";
+import createEventsService from "@/app/services/EventsService";
+
 export default async function Home() {
-  const eventsService = EventsService();
+  const eventsService = createEventsService();
   const { events } = await eventsService.getEvents();
  
   return (
