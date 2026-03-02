@@ -178,6 +178,7 @@ export async function GET(request: Request) {
   const response = await fetch('https://basketball-video.com/videos/nba_video/los_angeles_lakers_full_game_replay_highlights/24');
   const html = await response.text();
   const gameList = extractGameData(html);
+  console.log('gameList', gameList);
   const matchedGame = findMostSimilarGame(gameId!, gameList);
   console.log('matchedGame', matchedGame);
   const gameLink = await getGameLink(matchedGame?.link ?? '');
